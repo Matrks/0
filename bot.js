@@ -14,7 +14,7 @@ client.on('message', msg => {
 var prefix = "*";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`*help | WebSoon  `,"Watching")
+client.user.setGame(`*help | WebSoon  `,"https://www.twitch.tv/S-F")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
