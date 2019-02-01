@@ -1405,4 +1405,14 @@ if(!message.channel.guild) return;
   }
 });
 
+
+client.on('message', message => {
+  if(message.content === prefix + 'colors') {
+  if(!message.channel.guild) return message.channel.send('**This Commnad only For Servers !**'); 
+let menu = new Discord.RichEmbed()
+.setImage('https://b.top4top.net/p_1002p20mv1.png')
+.setFooter('Colors Menu')
+message.channel.sendEmbed(menu)
+
+	  
 client.login(process.env.BOT_TOKEN);
