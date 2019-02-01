@@ -1080,7 +1080,7 @@ client.on('message',async message => {
 
 client.on('message', message => {//new msg event
 if(!message.channel.guild) return;
-  if(message.content.startsWith(prefix + 'Rainbow')) {//to create the rainbow role
+  if(message.content.startsWith(prefix + 'setRainbow')) {//to create the rainbow role
 	  let role = message.guild.roles.find('-', 'Rainbow')
     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
   //start of create role 
@@ -1093,7 +1093,7 @@ if(!message.channel.guild) return;
 })
 
 }
-message.channel.send('Done The Rainbow Role Setup Has Been Completed')//if the step completed
+message.channel.send('**Rainbow تم انتهاء من عمل رتبه** ')//if the step completed
 }})
 
 client.on('ready', () => {//new ready event
