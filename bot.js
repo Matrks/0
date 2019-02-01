@@ -6,8 +6,10 @@ client.on('ready', () => {
 });
 
 var prefix = "$";
+	
 
-		client.on("message", message => {
+
+client.on("message", message => {
 
             if (message.content.startsWith(prefix + "obc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
@@ -20,5 +22,6 @@ var prefix = "$";
  message.delete(); 
 };     
 });
+
 
 client.login(process.env.BOT_TOKEN);
