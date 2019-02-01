@@ -1077,14 +1077,21 @@ client.on('message',async message => {
   }
 });
 
-client.on('message', message => {
-  if(message.content === prefix + 'colors') {
-  if(!message.channel.guild) return message.channel.send('**This Commnad only For Servers !**'); 
-let menu = new Discord.RichEmbed()
-.setImage('https://b.top4top.net/p_1002p20mv1.png')
-.setFooter('Colors Menu')
-message.channel.sendEmbed(menu)
+client.on('message', message => {//new msg event
+if(!message.channel.guild) return;
+  if(message.content.startsWith(prefix + 'Rainbow')) {//to create the rainbow role
+	  let role = message.guild.roles.find('-', 'Rainbow')
+    if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
+  //start of create role 
+  if(!role){
+    rainbow =  message.guild.createRole({
+   name: "Rainbow ",//the role will create name
+   color: "#000000",//the default color
+   permissions:[]//the permissions
+ //end of create role
+})
 
+}
 client.on('message', ra3d => {
                         let args = ra3d.content.split(" ").slice(1).join(" ")
 if(ra3d.content.startsWith(prefix + 'ccolors')) {
