@@ -1077,6 +1077,7 @@ client.on('message',async message => {
   }
 });
 
+
 client.on('message', message => {//new msg event
 if(!message.channel.guild) return;
   if(message.content.startsWith(prefix + 'Rainbow')) {//to create the rainbow role
@@ -1092,6 +1093,19 @@ if(!message.channel.guild) return;
 })
 
 }
+message.channel.send('Done The Rainbow Role Setup Has Been Completed')//if the step completed
+}})
+
+client.on('ready', () => {//new ready event
+  setInterval(function(){
+      client.guilds.forEach(g => {
+                  var role = g.roles.find('name', 'Rainbow bot.');//rainbow role name
+                  if (role) {
+                      role.edit({color : "RANDOM"});
+                  };
+      });
+  }, 5000);//the rainbow time
+})
 client.on('message', ra3d => {
                         let args = ra3d.content.split(" ").slice(1).join(" ")
 if(ra3d.content.startsWith(prefix + 'ccolors')) {
