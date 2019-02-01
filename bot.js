@@ -1357,7 +1357,7 @@ client.on("message", msg => {
 
 client.on('guildMemberAdd', member => {
   
-  const channel = member.guild.channels.find(ch => ch.name === 'xd11');
+  const channel = member.guild.channels.find(ch => ch.name === '-');
  
   if (!channel) return;
 
