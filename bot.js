@@ -1429,7 +1429,7 @@ client.on('guildMemberAdd', member => {
     const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
     const inviter = client.users.get(invite.inviter.id);
     const yumz = member.guild.channels.find("name", "hey");
-     yumz.send(`**- IGN : **<@${member.user.id}> **|** **By :**<@${inviter.id}>`);
+     yumz.send(`**- IGN : **<@${member.user.id}> **|** **By : **<@${inviter.id}>`);
    //  yumz.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
   }); 
 });
@@ -1466,19 +1466,5 @@ if(!message.channel.guild) return;
     }
 });
 
-
-client.on("message",(message) => {
-if(message.content.startsWith("*botserver")){
-    let embed = new Discord.RichEmbed()
-.setAuthor(client.guild.name,client.guild.iconURL)
-.setThumbnail(client.guild.iconURL)
-.addField('**Server Name**',client.guild.name)
-.addField('**Server Member Count**',client.guild.members.size)
-.addField(`Id Server`,`${client.guild.id}`)
-.addField(`Owner Server`,`${client.guild.owner}`)
-.setColor('RANDOM')
-message.channel.sendEmbed(embed);
-}
-});
 
 client.login(process.env.BOT_TOKEN);
