@@ -40,23 +40,24 @@ client.on('ready', () => {
 
 client.on('ready', function(){
     var ms = 7000;  //السرعه
-    var setGame = [`*invite | لدعوة بوت`,'*help'];
+    var setGame = [`Server Soon`,'Bot Soon'];
     var i = -1;
     var j = 0;
     setInterval(function (){
         if( i == -1 ){
             j = 1;
         }
-        if( i == (setGame.length)-1 ){
+        if( i == (setStreaming.length)-1 ){
             j = -1;
         }
         i = i+j;
-        client.user.setGame(setGame[i]);
+        client.user.setGame(setStreaming[i]);
     }, ms);
  
  
  
 })
+
 
 
 		client.on("message", message => {
