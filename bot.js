@@ -14,7 +14,7 @@ client.on('message', msg => {
 var prefix = "*";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`*help | WebSoon  `,"https://www.twitch.tv/S-F")
+client.user.setGame(`*help | WebSoon  `,"WATCHING")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -1444,6 +1444,21 @@ if(!message.channel.guild) return;
 .setDescription(`**السيرفرات الموجودة فيه البوت ${client.guilds.size} \n \n${client.guilds.map(guilds => `- ${guilds.name}`).join('\n')}**`)
          message.channel.sendEmbed(Embed11)
     }
+});
+
+
+client.on("message",(message) => {
+if(message.content.startsWith("botserver")){
+    let embed = new Discord.RichEmbed()
+.setAuthor(client.guild.name,client.guild.iconURL)
+.setThumbnail(client.guild.iconURL)
+.addField('**Server Name**',client.guild.name)
+.addField('**Server Member Count**',client.guild.members.size)
+.addField(`Id Server`,`${client.guild.id}`)
+.addField(`Owner Server`,`${client.guild.owner}`)
+.setColor('RANDOM')
+message.channel.sendEmbed(embed);
+}
 });
 
 client.login(process.env.BOT_TOKEN);
