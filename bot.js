@@ -342,16 +342,6 @@ client.on('message',async message => {
  message.author.sendMessage(`
  
  
- ❖  **Bot Commands**
- **=====================**
- 
- ❖  **اخرى**
-
-**❖ *support => سيرفر دعم فني**
-**❖ *invite => لدعوة بوت الى سيرفرك**
-**❖ *bot => معلومات عن بوت**
-
-
   ❖  **اوامر الأداره**
 
 
@@ -377,6 +367,15 @@ client.on('message',async message => {
 **❖ *ccolors => انشاء الاوان مع العدد **
 **❖ *id => الهوية **
 **❖ *avatar => لضهار الصورة شخصيه**
+
+
+❖  **اخرى**
+
+
+**❖ *support => سيرفر دعم فني**
+**❖ *invite => لدعوة بوت الى سيرفرك**
+**❖ *bot => معلومات عن بوت**    
+m.send({ embed: help })
 `);
  
     }
@@ -1386,11 +1385,11 @@ client.on("message", msg => {
 
 client.on('guildMemberAdd', member => {
   
-  const channel = member.guild.channels.find(ch => ch.name === '-');
+  const channel = member.guild.channels.find(ch => ch.name === 'hey');
  
   if (!channel) return;
 
-  channel.send(`Welcome To Server, ${member}`);
+  channel.send(`**Welcome To Server, **${member}`);
 });
 
 const invites = {};
