@@ -334,7 +334,8 @@ client.on('message',async message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
          message.channel.send('**Done | تــــم , :envelope:| شيك في الخاص** ');
-           
+          embed: new Discord.RichEmbed()
+
    
          
  
@@ -375,7 +376,6 @@ client.on('message',async message => {
 **❖ *support => سيرفر دعم فني**
 **❖ *invite => لدعوة بوت الى سيرفرك**
 **❖ *bot => معلومات عن بوت**    
-m.send({ embed: help })
 `);
  
     }
@@ -1080,12 +1080,12 @@ client.on('message',async message => {
 client.on('message', message => {//new msg event
 if(!message.channel.guild) return;
   if(message.content.startsWith(prefix + 'setRainbow')) {//to create the rainbow role
-	  let role = message.guild.roles.find('-', 'Rainbow')
+	  let role = message.guild.roles.find('-', 'Rainbow bot.')
     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
   //start of create role 
   if(!role){
     rainbow =  message.guild.createRole({
-   name: "Rainbow ",//the role will create name
+   name: "Rainbow bot. ",//the role will create name
    color: "#000000",//the default color
    permissions:[]//the permissions
  //end of create role
@@ -1302,7 +1302,7 @@ if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
- return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
+ return message.channel.send("**لاستخدام الأمر اكتب هذه الأمر : **"** +prefix+ "move [USER]**")
 }
 if (message.member.voiceChannel != null) {
  if (message.mentions.members.first().voiceChannel != null) {
@@ -1311,7 +1311,7 @@ if (message.member.voiceChannel != null) {
 var embed = new Discord.RichEmbed()
  .setTitle("Succes!")
  .setColor("#000000")
- .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك✅ `)
+ .setDescription(`**لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك✅ **`)
 var embed = new Discord.RichEmbed()
 .setTitle(`You are Moved in ${message.guild.name}`)
  .setColor("RANDOM")
@@ -1319,10 +1319,10 @@ var embed = new Discord.RichEmbed()
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
 message.guild.members.get(usermentioned).send(embed)
 } else {
-message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+message.channel.send("**لا تستطيع سحب **"+ message.mentions.members.first() +" **يجب ان يكون هذه العضو في روم صوتي**")
 }
 } else {
- message.channel.send("**``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``**")
+ message.channel.send("**يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك**")
 }
 } else {
 message.react("❌")
