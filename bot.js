@@ -14,7 +14,6 @@ client.on('message', msg => {
 var prefix = "*";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`*help | WebSoon  `,"WATCHING")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -37,6 +36,27 @@ client.user.setGame(`*help | WebSoon  `,"WATCHING")
   console.log('')
 
 });
+
+
+client.on('ready', function(){
+    var ms = 7000;  //السرعه
+    var setGame = [`*invite | لدعوة بوت`,'*help'];
+    var i = -1;
+    var j = 0;
+    setInterval(function (){
+        if( i == -1 ){
+            j = 1;
+        }
+        if( i == (setGame.length)-1 ){
+            j = -1;
+        }
+        i = i+j;
+        client.user.setGame(setGame[i]);
+    }, ms);
+ 
+ 
+ 
+})
 
 
 		client.on("message", message => {
