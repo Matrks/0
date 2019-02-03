@@ -1448,7 +1448,7 @@ if(!message.channel.guild) return;
 
 
 client.on("message",(message) => {
-if(message.content.startsWith("botserver")){
+if(message.content.startsWith("*botserver")){
     let embed = new Discord.RichEmbed()
 .setAuthor(client.guild.name,client.guild.iconURL)
 .setThumbnail(client.guild.iconURL)
