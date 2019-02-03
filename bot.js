@@ -40,7 +40,7 @@ client.on('ready', () => {
 
 client.on('ready', function(){
     var ms = 7000;  //السرعه
-    var setGame = [`Server Soon`,'Bot Soon'];
+    var setStreaming = [`*invite | لدعوة بوت`,'*help | لظهار اوامر بوت '];
     var i = -1;
     var j = 0;
     setInterval(function (){
