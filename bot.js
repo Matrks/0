@@ -3,6 +3,7 @@ const client = new Discord.Client();
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
 });
 
 
@@ -1560,5 +1561,6 @@ const pubg = [
    message.channel.sendEmbed(client);
    message.react("??")
  }
+});
 
 client.login(process.env.BOT_TOKEN);
