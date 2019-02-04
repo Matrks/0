@@ -38,6 +38,27 @@ client.on('ready', () => {
 });
 
 
+client.on('ready', function(){
+    var ms = 10000 ;
+    var setGame = [' *help','','Have Fun !'];
+    var i = -1;
+    var j = 0;
+    setInterval(function (){
+        if( i == -1 ){
+            j = 1;
+        }
+        if( i == (setGame.length)-1 ){
+            j = -1;
+        }
+        i = i+j;
+        client.user.setGame(setGame[i],`http://www.twitch.tv/iXMiDo`);
+    }, ms);
+  console.log('---------------');
+  console.log('GBot -Bot Is Online')
+  console.log('---------------')
+});
+
+
 const adminprefix = "*vip";
 const developers = ['429335711267815424'];
 
@@ -1489,9 +1510,7 @@ if(!message.channel.guild) return;
 
 
 const sWlc = {}
-const premium = ['396958215377780747', '', '', '']
 client.on('message', message => {
-var prefix = "-";
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
   if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
