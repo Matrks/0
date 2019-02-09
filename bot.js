@@ -101,10 +101,10 @@ if (message.content.startsWith(adminprefix + 'av')) {
     if (message.content.startsWith(prefix + "obc")) { ///@» MHSTR 🇮🇶#1119
                  if (!message.member.hasPermission("ADMINISTRATOR"))  return; //@» MHSTR 🇮🇶#1119
   let args = message.content.split(" ").slice(1); ///@» MHSTR 🇮🇶#1119
-  message.guild.members.filter(m => m.presence.status !== 'all').forEach(m => { //@» MHSTR 🇮🇶#1119
+  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => { //@» MHSTR 🇮🇶#1119
   m.send(`${argresult}\n ${m}`); ///@» MHSTR 🇮🇶#1119
   }) /// @» MHSTR 🇮🇶#1119
-  message.channel.send(`\`${message.guild.members.filter( m => m.presence.status !== 'all').size}\`:mailbox:  عدد المستلمين `);
+  message.channel.send(`\`${message.guild.members.filter( m => m.presence.status !== 'online').size}\`:mailbox:  عدد المستلمين `);
   message.delete(); ///@» MHSTR 🇮🇶#1119
   }; ///@» MHSTR 🇮🇶#1119
   }); //// @» MHSTR 🇮🇶#1119
@@ -117,7 +117,7 @@ if (message.content.startsWith(adminprefix + 'av')) {
                            if (!message.member.hasPermission("ADMINISTRATOR"))  return; //@» MHSTR 🇮🇶#1119
     let args = message.content.split(" ").slice(1);
     var argresult = args.join(' '); // @» MHSTR 🇮🇶#1119
-    message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
+    message.guild.members.filter(m => m.presence.status !== 'online').forEach(m => {
    m.send(`${argresult}\n ${m}`); //@» MHSTR 🇮🇶#1119
   }) ///@» MHSTR 🇮🇶#1119
    message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` :mailbox:  عدد المستلمين `);
