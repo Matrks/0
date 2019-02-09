@@ -97,35 +97,67 @@ if (message.content.startsWith(adminprefix + 'av')) {
     message.channel.send(`**جاري تغيير الأفتار... :** `);
 }
 })
-		client.on("message", message => {
-    if (message.content.startsWith(prefix + "obc")) { ///@» MHSTR 🇮🇶#1119
-                 if (!message.member.hasPermission("ADMINISTRATOR"))  return; //@» MHSTR 🇮🇶#1119
-  let args = message.content.split(" ").slice(1); ///@» MHSTR 🇮🇶#1119
-  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => { //@» MHSTR 🇮🇶#1119
-  m.send(`${argresult}\n ${m}`); ///@» MHSTR 🇮🇶#1119
-  }) /// @» MHSTR 🇮🇶#1119
-  message.channel.send(`\`${message.guild.members.filter( m => m.presence.status !== 'online').size}\`:mailbox:  عدد المستلمين `);
-  message.delete(); ///@» MHSTR 🇮🇶#1119
-  }; ///@» MHSTR 🇮🇶#1119
-  }); //// @» MHSTR 🇮🇶#1119
- 
- 
- 
-  client.on("message", message => {
-  ///@» MHSTR 🇮🇶#1119
-              if (message.content.startsWith(prefix + "bc")) { //@» MHSTR 🇮🇶#1119
-                           if (!message.member.hasPermission("ADMINISTRATOR"))  return; //@» MHSTR 🇮🇶#1119
-    let args = message.content.split(" ").slice(1);
-    var argresult = args.join(' '); // @» MHSTR 🇮🇶#1119
-    message.guild.members.filter(m => m.presence.status !== 'online').forEach(m => {
-   m.send(`${argresult}\n ${m}`); //@» MHSTR 🇮🇶#1119
-  }) ///@» MHSTR 🇮🇶#1119
-   message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` :mailbox:  عدد المستلمين `);
-   message.delete(); //@» MHSTR 🇮🇶#1119
-  };     /// @» MHSTR 🇮🇶#1119
-  }); ///@» MHSTR 🇮🇶#1119
 	
 	
+			client.on("message", message => {
+
+            if (message.content.startsWith(prefix + "obc")) {
+                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+  let args = message.content.split(" ").slice(1);
+  var argresult = args.join(' '); 
+  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
+ m.send(`${argresult}\n ${m}`);
+})
+ message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` : **عدد الاعضاء المستلمين**`); 
+ message.delete(); 
+};     
+});
+
+
+ client.on('message', message => {
+	 
+              if(!message.channel.guild) return;
+    if(message.content.startsWith(prefix + 'bc')) {
+    if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+  if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
+    let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+    let copy = "GBot , ✨";
+    let request = `Requested By ${message.author.username}`;
+    if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
+    msg.react('✅')
+    .then(() => msg.react('❌'))
+    .then(() =>msg.react('✅'))
+    
+    let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+    let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+    
+    let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+    let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+ reaction1.on("collect", r => {
+    message.channel.send(`**☑ | Done ... The Broadcast Message Has Been Sent For __${message.guild.members.size}__ Members**`).then(m => m.delete(5000));
+    message.guild.members.forEach(m => {
+  
+  var bc = new
+       Discord.RichEmbed()
+       .setColor('RANDOM')
+       .setTitle('Broadcast')
+       .addField('**سيرفر**', message.guild.name)
+       .addField('**المرسل**', message.author.username)
+       .addField('**الرسالة**', args)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter(copy, client.user.avatarURL);
+    m.send({ embed: bc })
+    msg.delete();
+    })
+    })
+    reaction2.on("collect", r => {
+    message.channel.send(`**Broadcast Canceled.**`).then(m => m.delete(5000));
+    msg.delete();
+    })
+    })
+    }
+    });
+
 	client.on("message", message => {
 		
 	var args = message.content.split(' ').slice(1); 
@@ -1533,5 +1565,42 @@ const pubg = [
 });
 
 
+client.on('message', message => {
+            let args = message.content.split(' ').slice(1);
+            if(message.content.split(' ')[0] == `${prefix}color`){
+            const embedd = new Discord.RichEmbed()
+            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+            .setDescription(`**لا يوجد لون بهذا الأسم ** ❌ `)
+            .setColor(`ff0000`)
+           
+            if(!isNaN(args) && args.length > 0)
+           
+           
+            if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
+           
+           
+            var a = message.guild.roles.find("name",`${args}`)
+             if(!a)return;
+            const embed = new Discord.RichEmbed()
+           
+            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+            .setDescription(`**Done , تم تغير لونك . ✅ **`)
+           
+            .setColor(`${a.hexColor}`)
+            message.channel.sendEmbed(embed);
+            if (!args)return;
+            setInterval(function(){})
+               let count = 0;
+               let ecount = 0;
+            for(let x = 1; x < 201; x++){
+           
+            message.member.removeRole(message.guild.roles.find("name",`${x}`))
+           
+            }
+             message.member.addRole(message.guild.roles.find("name",`${args}`));
+           
+           
+            }
+            });
 
 client.login(process.env.BOT_TOKEN);
