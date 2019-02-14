@@ -36,7 +36,7 @@ client.on('ready', () => {
 
 client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = [`${client.guilds.size} Server`,'$help','Type $help',`${client.users.size} Members`,'$inv','By: Matrks'];
+    var setGame = ["`${client.guilds.size} Server`,'$help','Type $help',`${client.users.size} Members`,'$inv','By: Matrks'];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -374,7 +374,7 @@ client.on('message',async message => {
  message.author.sendMessage(`
  
  
-  ❖  **اوامر الأداره**
+ ** ❖  **اوامر الأداره**
 
 
  **❖ $mute => عطاءشخص ميوت** 
@@ -391,7 +391,7 @@ client.on('message',async message => {
  **❖ $giveaway => لعمل قيف اواي**
   
 
-  ❖  **اوامر العامه**
+  **❖  **اوامر العامه**
 
 
 **❖ $setVoice => لعمل روم يظهر في كم شخص في رومات صوتيه**
@@ -402,13 +402,13 @@ client.on('message',async message => {
 **❖ $avatar => لضهار الصورة شخصيه**
 
 
- ❖ **اوامر العاب**
+** ❖ **اوامر العاب**
 
 
 **❖ $pubg**
 
 
-❖  **اخرى**
+**❖  **اخرى**
 
 
 **❖ $support => سيرفر دعم فني**
