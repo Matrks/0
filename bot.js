@@ -7,7 +7,7 @@ client.on('ready', () => {
 });
 
 
-var prefix = "*";
+var prefix = "$";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   console.log('')
@@ -36,7 +36,7 @@ client.on('ready', () => {
 
 client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = [' *help | لضهار قائمه الاوامر','','Have Fun !'];
+    var setGame = ['${client.guilds.size} Server`,'$help','Type $help',`${client.users.size} Members`,'$inv','By: Matrks'];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -377,43 +377,43 @@ client.on('message',async message => {
   ❖  **اوامر الأداره**
 
 
- **❖ *mute => عطاءشخص ميوت** 
- **❖ *unmute => لفك ميوت عن شخص**
- **❖ *ban => حظر شخص من سيرفر**
- **❖ *kick => طرد شحص من سيرفر**
- **❖ *move => لسحب شخص **
- **❖ *clear => لمسح شات**
- **❖ *closeroom => لتقفيل روم**
- **❖ *openroom => لفتح روم**
- **❖ *obc => ارسال برودكاست ولاين فقط**
- **❖ *bc => ارسال برودكاست اولاين و اوفلاين**
- **❖ *server => لعرض معلومات عن سيرفر**
- **❖ *giveaway => لعمل قيف اواي**
+ **❖ $mute => عطاءشخص ميوت** 
+ **❖ $unmute => لفك ميوت عن شخص**
+ **❖ $ban => حظر شخص من سيرفر**
+ **❖ $kick => طرد شحص من سيرفر**
+ **❖ $move => لسحب شخص **
+ **❖ $clear => لمسح شات**
+ **❖ $closeroom => لتقفيل روم**
+ **❖ $openroom => لفتح روم**
+ **❖ $obc => ارسال برودكاست ولاين فقط**
+ **❖ $bc => ارسال برودكاست اولاين و اوفلاين**
+ **❖ $server => لعرض معلومات عن سيرفر**
+ **❖ $giveaway => لعمل قيف اواي**
   
 
   ❖  **اوامر العامه**
 
 
-**❖ *setVoice => لعمل روم يظهر في كم شخص في رومات صوتيه**
-**❖ *setCount => لعمل روم يظهر في كم شخص في سيرفر**
-**❖ *color => **لتغير لونك في سيرفر**
-**❖ *ccolors => انشاء الاوان مع العدد **
-**❖ *id => الهوية **
-**❖ *avatar => لضهار الصورة شخصيه**
+**❖ $setVoice => لعمل روم يظهر في كم شخص في رومات صوتيه**
+**❖ $setCount => لعمل روم يظهر في كم شخص في سيرفر**
+**❖ $color => **لتغير لونك في سيرفر**
+**❖ $ccolors => انشاء الاوان مع العدد **
+**❖ $id => الهوية **
+**❖ $avatar => لضهار الصورة شخصيه**
 
 
  ❖ **اوامر العاب**
 
 
-**❖ *pubg
+**❖ $pubg**
 
 
 ❖  **اخرى**
 
 
-**❖ *support => سيرفر دعم فني**
-**❖ *invite => لدعوة بوت الى سيرفرك**
-**❖ *bot => معلومات عن بوت**   
+**❖ $support => سيرفر دعم فني**
+**❖ $inv => لدعوة بوت الى سيرفرك**
+**❖ $bot => معلومات عن بوت**   
 **❖ لو تبي بوت يرحب سوي روم اسمو hey**
 `);
  
@@ -1234,11 +1234,11 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-     if (message.content === "*support") {
+     if (message.content === "$support") {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#9B59B6")
-  .addField(" ** :gear: Server Support :gear: **" , "  **https://discord.gg/rJ9GHwU**")
+  .addField(" ** :gear: Server Support :gear: **" , "  **https://discord.gg/C4MwxqN**")
      
      
   message.channel.sendEmbed(embed);
@@ -1247,7 +1247,7 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-        if (message.content === "*invite") {
+        if (message.content === "$inv") {
             if(!message.channel.guild) return;
         let embed = new Discord.RichEmbed()
         .setAuthor(` ${message.author.username} `, message.author.avatarURL)      
@@ -1565,7 +1565,7 @@ client.on('message', message => {
             const embed = new Discord.RichEmbed()
            
             .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-            .setDescription(`**Done , تم تغير لونك . ✅ **`)
+            .setDescription(`** تم تغير لونك . ✅ **`)
            
             .setColor(`${a.hexColor}`)
             message.channel.sendEmbed(embed);
@@ -1586,61 +1586,4 @@ client.on('message', message => {
 
 
 
-client.on('message', message => {
-         
- 
-  if (message.content.startsWith("*user")) {
-   
-   if(!message.channel.guild) return message.reply(`هذا الأمر فقط ل السيرفرات `);
- 
-       message.guild.fetchInvites().then(invs => {
-let member = client.guilds.get(message.guild.id).members.get(message.author.id);
-let personalInvites = invs.filter(i => i.inviter.id === message.author.id);
-let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
-var moment = require('moment');
-var args = message.content.split(" ").slice(1);
-let user = message.mentions.users.first();
-var men = message.mentions.users.first();
-var heg;
-if(men) {
-heg = men
-} else {
-heg = message.author
-}
-var mentionned = message.mentions.members.first();
-var h;
-if(mentionned) {
-h = mentionned
-} else {
-h = message.member
-}
-moment.locale('ar-TN');
-var id = new  Discord.RichEmbed()
- 
-.setColor("#0a0909")
-.setThumbnail(message.author.avatarURL)
-.addField(': تاريخ دخولك للديسكورد',` \`${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} \`**\n ${moment(heg.createdTimestamp).fromNow()}**` ,true)
-.addField(': تاريخ دخولك لسيرفرنا', `\`${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')}  \` **\n ${moment(h.joinedAt).fromNow()} **`, true)
-.addField(` :لقد قمت بدعوة `, ` ${inviteCount} `)
- 
- 
-.setFooter(message.author.username, message.author.avatarURL)  
-message.channel.sendEmbed(id);
-})
-}
- 
- 
- 
-});
-
-
-client.on('message', message => {
-    if(message.content.includes('discord.gg')){
-                                            if(!message.channel.guild) return message.reply('** اتفضل    **');
-        if (!message.member.hasPermissions(['ADMINISTRATOR'])){
-        message.delete()
-    return message.reply(`** ممنوع نشر  !**`)
-    }
-}
-});
 client.login(process.env.BOT_TOKEN);
