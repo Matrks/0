@@ -1586,4 +1586,29 @@ client.on('message', message => {
 
 
 
+
+client.on('guildCreate', guild => {
+         const embed = new Discord.RichEmbed()
+     .setColor("RED")
+     .setTitle('Click Here To Add GBot .!')
+     .setURL('https://discordapp.com/oauth2/authorize?client_id=435392018693488641&scope=bot&permissions=2146958591')
+  .setDescription(`**
+  New Server Add Galaxy Bot ✅
+اسم السيرفر: ${guild.name}
+صاحب السيرفر: ${guild.owner}**`);
+client.channels.get("545681384354611219").sendEmbed(embed)
+});
+client.on('guildDelete', guild => {
+         const embed = new Discord.RichEmbed()
+     .setColor("GOLD")
+     .setTitle('Click Here To Add Bot .!')
+     .setURL('https://discordapp.com/oauth2/authorize?client_id=435392018693488641&scope=bot&permissions=2146958591')
+  .setDescription(`**
+  Server Kicked GBot :cry:
+اسم السيرفر: ${guild.name}
+صاحب السيرفر: ${guild.owner}**`);
+client.channels.get("545681384354611219").sendEmbed(embed)
+});
+
+
 client.login(process.env.BOT_TOKEN);
