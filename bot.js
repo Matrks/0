@@ -36,7 +36,7 @@ client.on('ready', () => {
 
 client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = ['${client.guilds.size} Server`,'$help','Type $help',`${client.users.size} Members`,'$inv','By: Matrks'];
+    var setGame = [`${client.guilds.size} Server`,'$help','Type $help',`${client.users.size} Members`,'$inv','By: Matrks'];
     var i = -1;
     var j = 0;
     setInterval(function (){
