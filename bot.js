@@ -1697,7 +1697,6 @@ eyad.delete();
 }}
 });
 
-const client = new Client({ disableEveryone: true})
 const ytdl = require("ytdl-core");
 const devs = ["" , "" , "" , "id"]
 const request = require("request");
