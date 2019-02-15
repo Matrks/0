@@ -1648,7 +1648,7 @@ client.on('guildDelete', guild => {
 client.channels.get("545681384354611219").sendEmbed(embed)
 });
 
-client.on('message',   eyad =>{
+client.on('صراحه',   eyad =>{
     
     var  args = eyad.content.split(" ").slice(2).join(" ")
     var men = eyad.mentions.users.first()|| client.users.get(eyad.content.split(' ')[1])
@@ -1697,7 +1697,7 @@ eyad.delete();
 }}
 });
 
-onst client = new Client({ disableEveryone: true})
+const client = new Client({ disableEveryone: true})
 const ytdl = require("ytdl-core");
 const devs = ["" , "" , "" , "id"]
 const request = require("request");
