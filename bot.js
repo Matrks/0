@@ -1701,16 +1701,6 @@ eyad.delete();
 client.on('error', (err) => console.log(err));
 client.on('ready', () => console.log(`Launching...`))
 /////////////////////////////////////////////////////////////////////////////////
-const ytdl = require("ytdl-core");
-const devs = ["" , "" , "" , "id"]
-const request = require("request");
-const convert = require("hh-mm-ss")
-const fs = require("fs");
-const getYouTubeID = require("get-youtube-id");
-const fetchVideoInfo = require("youtube-info");
-const simpleytapi = require('simple-youtube-api')
-const yt_api_key = "AIzaSyDoH9YxF0yi6ljyi2txYZHB10vXNUEP_2U"
-client.login(process.env.BOT_TOKEN);
 var guilds = {};
 client.on('message', async function(message) {
     if(message.author.bot) return;
