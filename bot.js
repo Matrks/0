@@ -1710,5 +1710,60 @@ message.channel.send(`**${user} عدد دعواتك ${inviteCount}**`);
 
 
 
+client.on('message', message => {
+if (!points[message.author.id]) points[message.author.id] = {
+    points: 0,
+  };
+  if(!message.guild) return;
+    let id = message.author.id,prefix="-";
+    if (spee[id] && (new Date).getTime() - spee[id] < 15*1000) {
+        let r = (new Date).getTime() - spee[id];
+        r = 15*1000 - r;
+    message.channel.send(`**Sorry, Please Wait ${pretty(r, {verbose:true})}...**`).then(m => m.delete(5000));
+    return;
+    }
+    if ( message.content == prefix+'speed'){
+       
+        try{
+}catch(e){
+ 
+}
+ 
+    if(!message.channel.guild) return message.reply('**ظ‡ط°ط§ ط§ظ„ط£ظ…ط± ظ„ظ„ط³ظٹط±ظپط±ط§طھ ظپظ‚ط·**').then(m => m.delete(3000));
+ 
+ 
+const item = type[Math.floor(Math.random() * type.length)];
+const filter = response => {  
+    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+};
+message.channel.send('**Game is Start now...!**').then(msg => {
+ 
+ const embed = new Discord.RichEmbed()
+ .setColor("0054dd")
+     .setAuthor(`âڈ³ |You have آ»15آ« seconds to type the word`)
+          .setImage(`${item.type}`)
+ .setFooter(`${message.author.tag}`, message.author.avatarURL)
+ 
+ 
+         
+msg.channel.send(embed).then(() => {
+        message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
+        .then((collected) => {
+                  const sh = new Discord.RichEmbed()
+  .setColor("04791c")
+  .setDescription('**âœ… |Good Job +1P**')
+   .setFooter(`${collected.first().author}`)
+  message.channel.sendEmbed(sh);
+            let won = collected.first().author; // ظپظٹ ظ‡ط°ط§ ط§ظ„ط³ط·ط± ظٹظ‚ظˆظ… ط§ظ„ظƒظˆط¯ ط¨ط³ط­ط¨ ط§ظ„ط£ظٹ ط¯ظٹ ط§ظ„ط°ظٹ ظ‚ط§ظ… ط¨ط§ظ„ط£ط¬ط§ط¨ط© ط§ظˆظ„ط§ظ‹
+            points[won.id].points++;
+          })
+          .catch(collected => { // ظپظٹ ط­ط§ظ„ ظ„ظ… ظٹظ‚ظ… ط£ط­ط¯ ط¨ط§ظ„ط¥ط¬ط§ط¨ط©
+            message.channel.send(`ًں”ڑ |**Time Is End**`);
+          })
+        })
+    })
+    spee[id] = (new Date).getTime()
+}
+});
 
 client.login(process.env.BOT_TOKEN);
