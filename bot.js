@@ -36,7 +36,7 @@ client.on('ready', () => {
 
 client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = [`${client.guilds.size} Server`,'$help','Type $help',`${client.users.size} Members`,'$inv','By: Matrks'];
+    var setGame = [`${client.guilds.size} Server`,'$help | اظهار قائمه الوامر','$inv | لدعوة بوت',`${client.users.size} Members`,'$inv','By: Matrks'];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -100,7 +100,7 @@ if (message.content.startsWith(adminprefix + 'av')) {
 	
 	
 client.on("message", message => {
-    if (message.content.startsWith("bc")) {
+    if (message.content.startsWith(prefix + "bc")) {
                  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' ');
