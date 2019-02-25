@@ -415,7 +415,7 @@ client.on('message',async message => {
 ❖ $support => سيرفر دعم فني
 ❖ $inv => لدعوة بوت الى سيرفرك
 ❖ $bot => معلومات عن بوت
-**❖ لو تبي بوت يرحب سوي روم اسمو hey
+❖ hey لو تبي بوت يرحب سوي روم اسمو **
 `);
  
     }
@@ -1371,7 +1371,7 @@ message.react("❌")
 
 
 client.on('message', message => { //By |.iiMostafaYT#1001
-    if (message.content.startsWith("*bot")) { //By |.iiMostafaYT#1001
+    if (message.content.startsWith("$bot")) { //By |.iiMostafaYT#1001
     message.channel.send({ //By |.iiMostafaYT#1001
         embed: new Discord.RichEmbed() //By |.iiMostafaYT#1001
             .setAuthor(client.user.username,client.user.avatarURL) //By |.iiMostafaYT#1001
@@ -1385,7 +1385,7 @@ client.on('message', message => { //By |.iiMostafaYT#1001
             .addField('**Users**' ,`[ ${client.users.size} ]` , true) //By |.iiMostafaYT#1001
             .addField('**Name Bot or tag**' , `[ ${client.user.tag} ]` , true) //By |.iiMostafaYT#1001
             .addField('**Bot Id**' , `[ ${client.user.id} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Owner**' , `[ <@42933571126781542> ]` , true) //By |.iiMostafaYT#1001
+            .addField('**Owner**' , ` <@42933571126781542> ` , true) //By |.iiMostafaYT#1001
     }) //By |.iiMostafaYT#1001
 } //By |.iiMostafaYT#1001
 }); //By |.iiMostafaYT#1001
