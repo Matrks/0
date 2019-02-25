@@ -36,7 +36,7 @@ client.on('ready', () => {
 
 client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = [`${client.guilds.size} Server`,'$help | اظهار قائمه الوامر','$inv | لدعوة بوت',`${client.users.size} Members`,'$inv','By: Matrks'];
+    var setGame = [`${client.guilds.size} Server`,'$help | اظهار قائمه الوامر','$inv | لدعوة بوت',`${client.users.size} Members`,'By: Matrks'];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -415,7 +415,7 @@ client.on('message',async message => {
 ❖ $support => سيرفر دعم فني
 ❖ $inv => لدعوة بوت الى سيرفرك
 ❖ $bot => معلومات عن بوت
-❖ لو تبي بوت يرحب سوي روم اسمو hey**
+**❖ لو تبي بوت يرحب سوي روم اسمو hey
 `);
  
     }
@@ -1378,20 +1378,14 @@ client.on('message', message => { //By |.iiMostafaYT#1001
             .setThumbnail(client.user.avatarURL) //By |.iiMostafaYT#1001
             .setColor('RANDOM') //By |.iiMostafaYT#1001
             .setTitle('Info GBot.') //By |.iiMostafaYT#1001
-            .addField('**My Ping**' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true) //By |.iiMostafaYT#1001
+            .addField('**Ping Is**' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true) //By |.iiMostafaYT#1001
             .addField('**RAM Usage**', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true) //By |.iiMostafaYT#1001
             .addField('**Servers**', [client.guilds.size], true) //By |.iiMostafaYT#1001
             .addField('**Channels**' , `[ ${client.channels.size} ]` , true) //By |.iiMostafaYT#1001
             .addField('**Users**' ,`[ ${client.users.size} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**My Name**' , `[ ${client.user.tag} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**My ID**' , `[ ${client.user.id} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**DiscordJS**' , `[ ${Discord.version} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**NodeJS**' , `[ ${process.version} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Arch**' , `[ ${process.arch} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Platform**' , `[ ${process.platform} ]` , true) //By |.iiMostafaYT#1001
-                  .addField('**My Prefix**' , `[ ${prefix} ]` , true) //By |.iiMostafaYT#1001
-                  .addField('**My Language**' , `[ Java Script ]` , true) //By |.iiMostafaYT#1001
-                  .setFooter('By | .Matrks#5598') //By |.iiMostafaYT#1001
+            .addField('**Name Bot or tag**' , `[ ${client.user.tag} ]` , true) //By |.iiMostafaYT#1001
+            .addField('**Bot Id**' , `[ ${client.user.id} ]` , true) //By |.iiMostafaYT#1001
+            .addField('**Owner**' , `[ <@42933571126781542> ]` , true) //By |.iiMostafaYT#1001
     }) //By |.iiMostafaYT#1001
 } //By |.iiMostafaYT#1001
 }); //By |.iiMostafaYT#1001
@@ -1532,7 +1526,7 @@ const pubg = [
 ]
    client.on('message', message => {
        if (message.author.bot) return;
- if (message.content.startsWith('*pubg')) {
+ if (message.content.startsWith('$pubg')) {
      if(!message.channel.guild) return message.reply('** This command only for servers **');
   var client= new Discord.RichEmbed()
   .setTitle("لعبه اسئله باتل جرواند")
