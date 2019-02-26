@@ -1386,7 +1386,7 @@ client.on('message', message => { //By |.iiMostafaYT#1001
             .addField('**Users**' ,`[ ${client.users.size} ]` , true) //By |.iiMostafaYT#1001
             .addField('**Name Bot or tag**' , `[ ${client.user.tag} ]` , true) //By |.iiMostafaYT#1001
             .addField('**Bot Id**' , `[ ${client.user.id} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Owner**' , ` <@42933571126781542> ` , true) //By |.iiMostafaYT#1001
+            .addField('**Owner**' , ` <@42933571126781542> ` ) //By |.iiMostafaYT#1001
     }) //By |.iiMostafaYT#1001
 } //By |.iiMostafaYT#1001
 }); //By |.iiMostafaYT#1001
