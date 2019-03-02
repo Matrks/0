@@ -1817,8 +1817,9 @@ client.on("message", (message) => {
   if (message.author.bot) return;
     if (message.author.id === client.user.id) return;
     if(!message.channel.guild) return;
-if (message.content.startsWith(prefix + 'credit')) {
+if (message.content.startsWith(prefix + '$credit')) {
   if(men) {
+if (!profile[men.id]) profile[men.id] = {
     lastDaily:'Not Collected',
     credits: 1,
   };
@@ -1830,7 +1831,7 @@ message.channel.send(`** ${men.username}, :credit_card: balance` + " is `" + `${
 }
 }
  
-if(message.content.startsWith(prefix + "daily")) {
+if(message.content.startsWith(prefix + "$daily")) {
   if(profile[message.author.id].lastDaily != moment().format('day')) {
     profile[message.author.id].lastDaily = moment().format('day')
     profile[message.author.id].credits += 500
@@ -1873,23 +1874,6 @@ message.channel.send(`**:moneybag: | ${message.author.username}, has transferrer
 }
  
       });
- 
-      client.on('message', message => {
-          if(!profile[message.author.id]) profile[message.author.id] ={
-              points: 0,
-              level: 1
-          };
-          if(message.author.bot) return;
-          profile[message.author.id].points = Math.floor(profile[message.author.id].points+1);
-          if(profile[message.author.id].points > 100) {
-              profile[message.author.id].points = 0
-              profile[message.author.id].level = Math.floor(profile[message.author.id].level+1);
-              message.channel.send(`**${message.author.username}, You leveld up to __${profile[message.author.id].level}__**`)
-          }
-          fs.writeFile('profile.json', JSON.stringify(profile), (err) => {
-if (err) console.error(err);
-})
-      })
  
     
   
