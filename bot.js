@@ -1810,42 +1810,58 @@ ${message.author.id}`);//Fras#2729
 );
  
     })}});
+ 
 
+const credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
+const coolDown = new Set();
 
-client.on("message", message => {
-  let args = message.content.split(" ").slice(1).join(" ")
-  const storechannel = message.guild.channels.find(c => c.name === '-');
-    if(message.content.startsWith(config.prefix + 'buysell')) {
-    if(!args) return message.channel.send('Please Type First The `Product` Then `Price`').then(m => m.delete(5000));
-      if(storechannel) {
-          let Storepost = new Discord.RichEmbed()
-          .setThumbnail("http://download.seaicons.com/icons/webalys/kameleon.pics/128/Online-Shopping-icon.png")
-          .addField('Sent By:',`${message.author.tag}`, true)
-          .addField('Product:',`${args}`, true)
-          .setFooter('Berserker', client.user.avatarURL)
-          .setTimestamp()
-          .setColor('RANDOM');
-          storechannel.sendEmbed(Storepost)
-          let Successful = new Discord.RichEmbed()
-          .setColor("RANDOM")
-          .setTitle(`Your Product Was Sent Successful`)
-          .addField('StoreChannel:',`Go ${storechannel} To See Your Post`, true)
-          .setFooter('Berserker', client.user.avatarURL)
-          .setTimestamp();
-          message.channel.sendEmbed(Successful)
-      } else {
-          message.guild.createChannel('-', 'text').then(channel => {
-          let everyoneRole = message.guild.roles.find('name', '@everyone');
-          channel.overwritePermissions(everyoneRole, {
-              SEND_MESSAGES: false,
-              READ_MESSAGES: true
-              })
-            }).then(() => {
-          message.channel.send('Please Try Again Cause There Was No Store Channel... Type First The `Product` Then `Price`')
-      });
-    }       
+client.on('message',async message => {//لاتنسى سوي ملف إسمو creditsCode.json 
+    
+if(message.author.bot) return;//وضع فيه {}
+if(!credits[message.author.id]) credits[message.author.id] = {
+    credits: 5000000
+};
+
+let userData = credits[message.author.id];
+let m = userData.credits;
+
+fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
+    if (err) console.error(err);
+  });
+  credits[message.author.id] = {
+      credits: m + 500,
   }
-});//By MK ...Alpha Codes
+  
+    if(message.content.startsWith(prefix + "$credit" || prefix + "$credits")) {
+message.channel.send(`**${message.author.username}, your :credit_card: balance is \`\`${userData.credits}\`\`.**`);
+}
+});
+
+client.on('message', async message => {
+    let amount = 25000000;//هنا شوف كم تبي كريديت لما تسوي دايلي 
+    if(message.content.startsWith(prefix + "$daily")) {
+    if(message.author.bot) return;
+    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);//هنا مدة تحديث الكريديت
+    
+    let userData = credits[message.author.id];
+    let m = userData.credits + amount;
+    credits[message.author.id] = {
+    credits: m
+    };
+
+    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
+    if (err) console.error(err);
+    });
+    
+    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
+        coolDown.add(message.author.id);
+    });
+    
+    setTimeout(() => {
+       coolDown.remove(message.author.id);
+    },86400000);
+    }
+});
 
 
 client.login(process.env.BOT_TOKEN);
