@@ -1811,7 +1811,7 @@ ${message.author.id}`);//Fras#2729
  
     })}});
  
-lient.on("message", (message) => {
+client.on("message", (message) => {
   let men = message.mentions.users.first()
  
   if (message.author.bot) return;
