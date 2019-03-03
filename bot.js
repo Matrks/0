@@ -1411,7 +1411,7 @@ client.on("message", msg => {
             .addField('**Channels** :' , `[ ${client.channels.size} ]` , true)
             .addField('**Users** :' ,`[ ${client.users.size} ]` , true)
             .addField('**Bot Name** :' , `[ ${client.user.tag} ]` , true)
-            .addField('**Bot Owner**:' , `[<@42933571126781542>]` , true)
+            .addField('**Bot Owner**:' , `[$<@42933571126781542>]` , true)
             .setFooter(message.author.username, message.author.avatarURL)
     })
 }
