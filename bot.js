@@ -1812,5 +1812,31 @@ ${message.author.id}`);//Fras#2729
  
     })}});
 
+const prefix = "$" // البرفكس
+client.on("message", (message) => {
+    if (message.author.bot) return;
+    if (0 != message.content.indexOf(prefix)) return;
+    const [command, ...args] = message.content.slice(prefix.length).split(/ +/g);
+    if (command === "give") { // غير اسم الامر من هنا
+        let freeRole = message.guild.roles.find(role => role.name == ".");
+        if (!freeRole) return message.reply("Hey, Hthis role seems to be deleted i can\'t find it");
+        if (message.member.roles.some(role => role.name == freeRole.name)) {
+            message.member.removeRole(freeRole).then(() => {
+                message.reply("the role removed !")
+            })
+            .catch(() => {
+                message.reply("something went wrong, i can\'t remove the role from you.")
+            });;
+        } else {
+            message.member.addRole(freeRole)
+                .then(() => {
+                    message.reply("you got it!")
+                })
+                .catch(() => {
+                    message.reply("something went wrong, i can\'t give you the role.")
+                });
+        }
+    }
+});
 
 client.login(process.env.BOT_TOKEN);
