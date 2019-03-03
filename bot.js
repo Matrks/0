@@ -1812,7 +1812,6 @@ ${message.author.id}`);//Fras#2729
  
     })}});
 
-const prefix = "$" // البرفكس
 client.on("message", (message) => {
     if (message.author.bot) return;
     if (0 != message.content.indexOf(prefix)) return;
