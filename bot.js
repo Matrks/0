@@ -1372,26 +1372,6 @@ message.react("❌")
  }}});
 
 
-client.on('message', message => { //By |.iiMostafaYT#1001
-    if (message.content.startsWith("$bot")) { //By |.iiMostafaYT#1001
-    message.channel.send({ //By |.iiMostafaYT#1001
-        embed: new Discord.RichEmbed() //By |.iiMostafaYT#1001
-            .setAuthor(client.user.username,client.user.avatarURL) //By |.iiMostafaYT#1001
-            .setThumbnail(client.user.avatarURL) //By |.iiMostafaYT#1001
-            .setColor('RANDOM') //By |.iiMostafaYT#1001
-            .setTitle('Info GBot.') //By |.iiMostafaYT#1001
-            .addField('**Ping Is**' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true) //By |.iiMostafaYT#1001
-            .addField('**RAM Usage**', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true) //By |.iiMostafaYT#1001
-            .addField('**Servers**', [client.guilds.size], true) //By |.iiMostafaYT#1001
-            .addField('**Channels**' , `[ ${client.channels.size} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Users**' ,`[ ${client.users.size} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Name Bot or tag**' , `[ ${client.user.tag} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Bot Id**' , `[ ${client.user.id} ]` , true) //By |.iiMostafaYT#1001
-            .addField('**Owner**' , ` <@42933571126781542> ` ) //By |.iiMostafaYT#1001
-    }) //By |.iiMostafaYT#1001
-} //By |.iiMostafaYT#1001
-}); //By |.iiMostafaYT#1001
-
 
 client.on('guildCreate', guild => {
     var embed = new Discord.RichEmbed()
@@ -1419,7 +1399,23 @@ client.on("message", msg => {
       msg.channel.send({embed: embed})
   }
 });
-
+	   client.on('message', message => {
+    if (message.content === ('$bot')) {
+    message.channel.send({
+        embed: new Discord.RichEmbed()
+            .setAuthor(client.user.username,client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL)
+            .setColor('000000')
+            .addField('**Ping Is** :' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+            .addField('**Servers** :', [client.guilds.size], true)
+            .addField('**Channels** :' , `[ ${client.channels.size} ]` , true)
+            .addField('**Users** :' ,`[ ${client.users.size} ]` , true)
+            .addField('**Bot Name** :' , `[ ${client.user.tag} ]` , true)
+            .addField('**Bot Owner**:' , `[<@42933571126781542>]` , true)
+            .setFooter(message.author.username, message.author.avatarURL)
+    })
+}
+});
 client.on('guildMemberAdd', member => {
   
   const channel = member.guild.channels.find(ch => ch.name === 'hey');
