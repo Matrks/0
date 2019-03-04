@@ -133,14 +133,14 @@ client.on('message', async msg => {
 	command = command.slice(prefix.length)
 	if (command === `play`) {
 		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send('يجب توآجد حضرتك بروم صوتي .');
+		if (!voiceChannel) return msg.channel.send('**يجب توآجد حضرتك بروم صوتي .**');
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
 		if (!permissions.has('CONNECT')) {
 			
-			return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
+			return msg.channel.send('**لا يتوآجد لدي صلاحية للتكلم بهذآ الروم**');
 		}
 		if (!permissions.has('SPEAK')) {
-			return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
+			return msg.channel.send('**لا يتوآجد لدي صلاحية للتكلم بهذآ الروم**');
 		}
 
 		if (!permissions.has('EMBED_LINKS')) {
@@ -168,7 +168,7 @@ client.on('message', async msg => {
 			        .setDescription(`**الرجآء من حضرتك إختيآر رقم المقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
-					.setFooter("Super Bot")
+					.setFooter("GBot")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
 					try {
@@ -179,44 +179,44 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 						});
 					} catch (err) {
 						console.error(err);
-						return msg.channel.send('لم يتم إختيآر مقطع صوتي');
+						return msg.channel.send('**لم يتم إختيآر مقطع صوتي**');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send(':X: لا يتوفر نتآئج بحث ');
+					return msg.channel.send(':X: **لا يتوفر نتآئج بحث** ');
 				}
 			}
 
 			return handleVideo(video, msg, voiceChannel);
 		}
 	} else if (command === `skip`) {
-		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
-		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
-		serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
+		if (!msg.member.voiceChannel) return msg.channel.send('**أنت لست بروم صوتي .**');
+		if (!serverQueue) return msg.channel.send('**لا يتوفر مقطع لتجآوزه**');
+		serverQueue.connection.dispatcher.end('**تم تجآوز هذآ المقطع**');
 		return undefined;
 	} else if (command === `stop`) {
-		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
-		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لإيقآفه');
+		if (!msg.member.voiceChannel) return msg.channel.send('**أنت لست بروم صوتي .**');
+		if (!serverQueue) return msg.channel.send('**لا يتوفر مقطع لإيقآفه**');
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('تم إيقآف هذآ المقطع');
+		serverQueue.connection.dispatcher.end('**تم إيقآف هذآ المقطع**');
 		return undefined;
 	} else if (command === `vol`) {
-		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
+		if (!msg.member.voiceChannel) return msg.channel.send('**أنت لست بروم صوتي .**');
 		if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
 		if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
 		return msg.channel.send(`:speaker: تم تغير الصوت الي **${args[1]}**`);
 	} else if (command === `np`) {
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+		if (!serverQueue) return msg.channel.send('**لا يوجد شيء حالي ف العمل.**');
 		const embedNP = new Discord.RichEmbed()
 	.setDescription(`:notes: الان يتم تشغيل : **${serverQueue.songs[0].title}**`)
 		return msg.channel.sendEmbed(embedNP);
 	} else if (command === `queue`) {
 		
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+		if (!serverQueue) return msg.channel.send('**لا يوجد شيء حالي ف العمل.**');
 		let index = 0;
 		
 		const embedqu = new Discord.RichEmbed()
@@ -229,16 +229,16 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('تم إيقاف الموسيقى مؤقتا!');
+			return msg.channel.send('**تم إيقاف الموسيقى مؤقتا!**');
 		}
-		return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+		return msg.channel.send('**لا يوجد شيء حالي ف العمل.**');
 	} else if (command === "resume") {
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('استأنفت الموسيقى بالنسبة لك !');
+			return msg.channel.send('**استأنفت الموسيقى بالنسبة لك !**');
 		}
-		return msg.channel.send('لا يوجد شيء حالي في العمل.');
+		return msg.channel.send('**لا يوجد شيء حالي في العمل.**');
 	}
 
 	return undefined;
@@ -585,75 +585,75 @@ client.on('message',async message => {
  ** ❖  اوامر الأداره
 
 
-❖ $mute | عطاءشخص ميوت
+:gear: $mute | عطاءشخص ميوت
 
-❖ $unmute | لفك ميوت عن شخص
+:gear: $unmute | لفك ميوت عن شخص
  
-❖ $ban | حظر شخص من سيرفر
+:gear: $ban | حظر شخص من سيرفر
 
-❖ $kick | طرد شحص من سيرفر
+:gear: $kick | طرد شحص من سيرفر
 
-❖ $move | لسحب شخص 
+:gear: $move | لسحب شخص 
 
-❖ $clear | لمسح شات
+:gear: $clear | لمسح شات
 
-❖ $closeroom | لتقفيل روم
+:gear: $closeroom | لتقفيل روم
 
-❖ $openroom | لفتح روم
+:gear: $openroom | لفتح روم
 
-❖ $obc | ارسال برودكاست ولاين فقط
+:gear: $obc | ارسال برودكاست ولاين فقط
 
-❖ $bc | ارسال برودكاست اولاين و اوفلاين
+:gear: $bc | ارسال برودكاست اولاين و اوفلاين
 
-❖ $server | لعرض معلومات عن سيرفر
+:gear: $server | لعرض معلومات عن سيرفر
 
-❖ $giveaway | لعمل قيف اواي
+:gear: $giveaway | لعمل قيف اواي
   
 
   ❖  اوامر عامه
 
 
-❖ $invite | لمعرفه عدد دعواتك
+:earth_asia: $invite | لمعرفه عدد دعواتك
 
-❖ $setVoice | لعمل روم يظهر في كم شخص في رومات صوتيه
+:earth_asia: $setVoice | لعمل روم يظهر في كم شخص في رومات صوتيه
 
-❖ $setCount | لعمل روم يظهر في كم شخص في سيرفر
+:earth_asia: $setCount | لعمل روم يظهر في كم شخص في سيرفر
 
-❖ $color | لتغير لونك في سيرفر
+:earth_asia: $color | لتغير لونك في سيرفر
 
-❖ $ccolors | انشاء الاوان مع العدد 
+:earth_asia: $ccolors | انشاء الاوان مع العدد 
 
-❖ $Dletecolor | لحذف جميع الاوان
+:earth_asia: $Dletecolor | لحذف جميع الاوان
 
-❖ $id | الهوية 
+:earth_asia: $id | الهوية 
 
-❖ $avatar | لضهار الصورة شخصيه
+:earth_asia: $avatar | لضهار الصورة شخصيه
 
 
  ❖ اوامر العاب
 
 
-❖ $pubg
+:video_game: $pubg
 
 
  ❖ اوامر الموسيقى
 
 
-❖ $play | لتشغيل اغنية برابط او بأسم
+:notes: $play | لتشغيل اغنية برابط او بأسم
 
-❖ $skip | لتجآوز الأغنية الحآلية
+:notes: $skip | لتجآوز الأغنية الحآلية
 
-❖ $pause | إيقآف الأغنية مؤقتا
+:notes: $pause | إيقآف الأغنية مؤقتا
 
-❖ $resume | لموآصلة الإغنية بعد إيقآفهآ مؤقتا
+:notes: $resume | لموآصلة الإغنية بعد إيقآفهآ مؤقتا
 
-❖ $vol | لتغيير درجة الصوت 100 - 0
+:notes: $vol | لتغيير درجة الصوت 100 - 0
 
-❖ $stop | لإخرآج البوت من الروم
+:notes: $stop | لإخرآج البوت من الروم
 
-❖ $np | لمعرفة الأغنية المشغلة حآليا
+:notes: $np | لمعرفة الأغنية المشغلة حآليا
 
-❖ $queue | لمعرفة قآئمة التشغيل
+:notes: $queue | لمعرفة قآئمة التشغيل
 
  ❖  اخرى
 
@@ -2079,4 +2079,67 @@ client.on("message", (message) => {
     }
 });
 
+client.on("message", (message) => {
+  let men = message.mentions.users.first()
+ 
+  if (message.author.bot) return;
+    if (message.author.id === client.user.id) return;
+    if(!message.channel.guild) return;
+if (message.content.startsWith(prefix + 'credit')) {
+  if(men) {
+    if (!profile[men.id]) profile[men.id] = {
+    lastDaily:'Not Collected',
+    credits: 1,
+  };
+  }
+  if(men) {
+message.channel.send(`** ${men.username}, :credit_card: balance` + " is `" + `${profile[men.id].credits}$` + "`.**")
+} else {
+  message.channel.send(`** ${message.author.username}, your :credit_card: balance` + " is `" + `${profile[message.author.id].credits}$` + "`.**")
+}
+}
+ 
+if(message.content.startsWith(prefix + "daily")) {
+  if(profile[message.author.id].lastDaily != moment().format('day')) {
+    profile[message.author.id].lastDaily = moment().format('day')
+    profile[message.author.id].credits += 500
+     message.channel.send(`**${message.author.username} you collect your \`500\` :dollar: daily pounds**`)
+} else {
+    message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes ${moment().endOf('day').fromNow()}**`)
+}
+  }
+ 
+ let cont = message.content.slice(prefix.length).split(" ");
+let args = cont.slice(1);
+let sender = message.author
+if(message.content.startsWith(prefix + 'trans')) {
+          if (!args[0]) {
+            message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
+         return;
+           }
+        // We should also make sure that args[0] is a number
+        if (isNaN(args[0])) {
+            message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
+            return; // Remember to return if you are sending an error message! So the rest of the code doesn't run.
+             }
+            let defineduser = '';
+            let firstMentioned = message.mentions.users.first();
+            defineduser = (firstMentioned)
+            if (!defineduser) return message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
+            var mentionned = message.mentions.users.first();
+if (!profile[sender.id]) profile[sender.id] = {}
+if (!profile[sender.id].credits) profile[sender.id].credits = 500;
+fs.writeFile('profile.json', JSON.stringify(profile), (err) => {
+if (err) console.error(err);
+})
+      var mando = message.mentions.users.id;
+      if  (!profile[defineduser.id]) profile[defineduser.id] = {}
+      if (!profile[defineduser.id].credits) profile[defineduser.id].credits = 500;
+      profile[defineduser.id].credits += (+args[0]);
+      profile[sender.id].credits += (-args[0]);
+      let mariam = message.author.username
+message.channel.send(`**:moneybag: | ${message.author.username}, has transferrerd ` + "`" + args[0] + "$` to " + `<@${defineduser.id}>**`)
+}
+ 
+      });
 client.login(process.env.BOT_TOKEN);
