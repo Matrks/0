@@ -2,9 +2,9 @@
     "name": "test",
     "description": "Test",
     "version": "0.0.0",
-    "main": "probot.js",
+    "main": "bot.js",
     "scripts": {
-      "start": "node probot.js"
+      "start": "node bot.js"
     },
     "dependencies": {
       "array-sort": "^1.0.0",
