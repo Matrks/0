@@ -2091,7 +2091,6 @@ if (message.content.startsWith(prefix + 'credit')) {
     lastDaily:'Not Collected',
     credits: 1,
   };
-  }
   if(men) {
 message.channel.send(`** ${men.username}, :credit_card: balance` + " is `" + `${profile[men.id].credits}$` + "`.**")
 } else {
