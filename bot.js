@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const db = require('quick.db');
-  const dailies = require("./dailies.json")
 const client = new Discord.Client();   
 const giphy = require('giphy-api')();    
 const googl = require('goo.gl'); 
@@ -2089,24 +2088,7 @@ client.on("message", (message) => {
 });
 	  
 
- client.on('message', message => {
-  if(message.author.bot) return;
-  if(message.channel.type === 'dm') return;
-  let men = message.mentions.users.first() || message.author;
-  moment.locale('en')
-
-  if(message.content.startsWith(prefix + "daily")) {
-
-
-    con.query(`SELECT * FROM scores WHERE userId = '${message.author.id}'`, (err, rows) => {
-      if(err) throw err;
  
-        con.query(`UPDATE userDI SET creds = '${rows[0].credit + 50}' WHERE id = '${message.author.id}'`)
-             });
-        }
-    }
-});
-	
 
  
      
