@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const db = require('quick.db');
+  const dailies = require("./dailies.json")
 const client = new Discord.Client();   
 const giphy = require('giphy-api')();    
 const googl = require('goo.gl'); 
@@ -23,6 +24,7 @@ const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const sql = require("sqlite");
  const dateFormat = require('dateformat');
  const pretty = require('pretty-ms') 
+ var mysql = require("mysql")
 ,ti={}  
 ,spee={};
 
@@ -2088,7 +2090,44 @@ client.on("message", (message) => {
 });
 	  
 
+ client.on('message', message => {
+  if(message.author.bot) return;
+  if(message.channel.type === 'dm') return;
+  let men = message.mentions.users.first() || message.author;
+  moment.locale('en')
+
+  if(message.content.startsWith(prefix + "daily")) {
+
+
+    con.query(`SELECT * FROM scores WHERE userId = '${message.author.id}'`, (err, rows) => {
+      if(err) throw err;
  
+        con.query(`UPDATE userDI SET creds = '${rows[0].credit + 50}' WHERE id = '${message.author.id}'`)
+
+
+    })
+
+  }
+  if(message.content.startsWith(prefix + 'credit')) {
+  if(message.author.bot) return;
+  if(message.channel.type !== "text") return;
+        con.query(`SELECT * FROM userDI WHERE id = '${men.id}'`, (err, rows) => {
+          if(!rows || !rows[0] || rows.lenght < 0) {
+            message.channel.send(`**${men.username}'s :credit_card: balance is \`\`#0\`\`.**`)
+          } else {
+            message.channel.send(`**${men.username}'s :credit_card: balance is \`\`$${rows[0].creds}\`\`.**`)
+        }
+      })
+  }
+  if(message.content.startsWith(prefix + "profile")) {
+  if(message.author.bot) return;
+  if(message.channel.type !== "text") return;
+    message.channel.startTyping()
+    setTimeout(() => {
+          message.channel.stopTyping()
+}, 1000)
+  }
+})
 
  
      
