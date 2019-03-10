@@ -2106,27 +2106,7 @@ client.on("message", (message) => {
 
     })
 
-  }
-  if(message.content.startsWith(prefix + 'credit')) {
-  if(message.author.bot) return;
-  if(message.channel.type !== "text") return;
-        con.query(`SELECT * FROM userDI WHERE id = '${men.id}'`, (err, rows) => {
-          if(!rows || !rows[0] || rows.lenght < 0) {
-            message.channel.send(`**${men.username}'s :credit_card: balance is \`\`#0\`\`.**`)
-          } else {
-            message.channel.send(`**${men.username}'s :credit_card: balance is \`\`$${rows[0].creds}\`\`.**`)
-        }
-      })
-  }
-  if(message.content.startsWith(prefix + "profile")) {
-  if(message.author.bot) return;
-  if(message.channel.type !== "text") return;
-    message.channel.startTyping()
-    setTimeout(() => {
-          message.channel.stopTyping()
-}, 1000)
-  }
-})
+  
 
  
      
