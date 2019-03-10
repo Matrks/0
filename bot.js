@@ -24,7 +24,6 @@ const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const sql = require("sqlite");
  const dateFormat = require('dateformat');
  const pretty = require('pretty-ms') 
- var mysql = require("mysql")
 ,ti={}  
 ,spee={};
 
