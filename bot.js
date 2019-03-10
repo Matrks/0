@@ -2102,11 +2102,11 @@ client.on("message", (message) => {
       if(err) throw err;
  
         con.query(`UPDATE userDI SET creds = '${rows[0].credit + 50}' WHERE id = '${message.author.id}'`)
-
-
-    })
+             });
+        }
+    }
 });
-  
+	
 
  
      
