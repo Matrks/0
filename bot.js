@@ -120,6 +120,28 @@ if (message.content.startsWith(adminprefix + 'av')) {
 })
 	
 
+client.on('ready', () => {//new ready event
+    setInterval(function(){
+        client.guilds.forEach(g => {
+                    var role = g.roles.find('name', 'VIP Rainbow');//rainbow role name
+                    if (role) {
+                        role.edit({color : "RANDOM"});
+                    };
+        });
+    }, 13000);//the rainbow time
+  })
+client.on('message', message => {//new msg event
+    if(!message.channel.guild) return;
+      if(message.content.startsWith(prefix + 'rainbow')) {//to create the rainbow role
+       let rrole = message.guild.roles.find('name', 'VIP Rainbow')
+       if(!message.member.roles.find('name','Legend .')) return message.channel.send(`\`\`\`diff\n-Just For VIP\`\`\``);
+       if(message.member.roles.find('name','VIP Rainbow')) return message.channel.send(`عندك الرتبة !`);
+       message.member.addRole(rrole);
+       var emdo = new Discord.RichEmbed()
+       .setTitle(`:white_check_mark: **تم أعطائك الرتبة بنجاح!**`)
+     message.channel.send(emdo);
+      }
+    })
 
 client.on('message', async msg => { 
 	if (msg.author.bot) return undefined;
