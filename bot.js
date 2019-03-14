@@ -2189,7 +2189,7 @@ member.guild.fetchInvites().then(guildInvites => {
 client.on('message',async message => {
 const emojis   = { arrow: `${client.guilds.find(r => r.id === '553508691425361940').emojis.find(e => e.name === 'arrow')}` };
 
-       if (message.content.startsWith(prefix + "5")) {
+       if (message.content.startsWith(prefix + "help")) {
         
        message.channel.send(`** • قـــائمة الاومر ** :
        ${emojis.arrow}, **| ${prefix}help-ticket ⇏ \`اوامر التكت!\`
@@ -2199,4 +2199,5 @@ const emojis   = { arrow: `${client.guilds.find(r => r.id === '55350869142536194
    }
 
 });
+
 client.login(process.env.BOT_TOKEN);
