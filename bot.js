@@ -3,6 +3,7 @@ const db = require('quick.db');
 const client = new Discord.Client();   
 const giphy = require('giphy-api')();    
 const googl = require('goo.gl'); 
+let GiftKeys = JSON.parse(fs.readFileSync("./giftkeys1.json", "utf8"));
 const translate = require('google-translate-api'); 
 const fs = require("fs");      
 const getYoutubeID = require('get-youtube-id'); 
@@ -120,6 +121,153 @@ if (message.content.startsWith(adminprefix + 'av')) {
 })
 	
 
+
+
+
+var prefix = "!"
+client.on('message', message => {
+    let id = "441584713799303183";
+    let role = "VIP";
+    let cmd = message.content.split(' ')[0];
+    if(cmd === `${prefix}buy`){
+        if(message.author.bot) return ;
+        if(!message.channel.guild) return;
+        let vipembed = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.displayAvatarURL)
+        .setThumbnail(message.author.avatarURL)
+        .setTitle(`**اختر الطريقه المناسبه بالنسبه لك**`)
+        .addField(`**لشراء الرتبه لنفسك**`, `1⃣`,true)
+        .addField(`**لشراء الرتبه ك هديه**`, `2⃣`,true)
+        .setTimestamp()
+        .setFooter(client.user.username, client.user.displayAvatarURL)
+        message.channel.send(vipembed).then(message2 => {
+            message2.react("1⃣").then(() => {
+                message2.react("2⃣").then(() => {
+                    const forme = (reaction, user) => reaction.emoji.name === "1⃣" && user.id === message.author.id;
+                    const gift = (reaction, user) => reaction.emoji.name === "2⃣" && user.id === message.author.id;
+                    const formere = message2.createReactionCollector(forme, {time: 120000});
+                    const giftre = message2.createReactionCollector(gift, {time: 120000});
+                    formere.on("collect", r => {
+                        message2.delete()
+                        if(message.member.roles.find("name", role)) return message.reply(`**انت تمتلك الرتبه بالفعل!**`);
+                        let rolefind = message.guild.roles.find("name", role);
+                        if(!rolefind) return message.reply(`**لا استطيع القيام بعملي لعدم توفر الرتبه \`${role}\``)
+                        var purchasemeembed = new Discord.RichEmbed()
+                        .setDescription(`**لديك 4 دقائق لشراء الرتبه\n \nقم بتحويل مبلغ 10 الاف كريديت برو بوت\n \n الى : ${message.guild.members.get(id)}**`)
+                        .setColor("RED")
+                        message.channel.send(purchasemeembed).then(um => {
+                            const filter = response => response.author.id == "282859044593598464" && response.mentions._content.includes(`:moneybag: | ${message.author.username}, has transferred \`$9900\` to ${message.guild.members.get(id)}`);
+                            message.channel.awaitMessages(filter, { maxMatches: 1, time: 240000, errors: ['time']})
+                            .then(collected => {
+                                um.delete()
+                                var giveembed = new Discord.RichEmbed()
+                                .setDescription(`**تم اعطائك الرتبه **\`${role}\``)
+                                .setColor("PURPLE")
+                                message.channel.send(giveembed);
+                                message.member.addRole(rolefind);
+                            }).catch(e => {})
+                        })
+                    })
+                    giftre.on("collect", r => {
+                        message2.delete()
+                        let rolefind = message.guild.roles.find("name", role);
+                        if(!rolefind) return message.reply(`**لا استطيع القيام بعملي لعدم توفر الرتبه \`${role}\``)
+                        var purchasegiftembed = new Discord.RichEmbed()
+                        .setDescription(`**لديك 4 دقائق لشراء كود قفت للرتبة\n قم بتحويل مبلغ 10 الاف كريديت برو بوت \n \n \n الى : ${message.guild.members.get(id)}**`)
+                        .setColor("RED")
+                        message.channel.send(purchasegiftembed).then(um => {
+                            const filter = response => response.author.id == "282859044593598464" && response.mentions._content.includes(`:moneybag: | ${message.author.username}, has transferred \`$9900\` to ${message.guild.members.get(id)}`);
+                            message.channel.awaitMessages(filter, { maxMatches: 1, time: 240000, errors: ['time']})
+                            .then(collected => {
+                                um.delete()
+                                generateKey(message,rolefind);
+                            }).catch(e => {});
+                        })
+                    })
+                })
+            })
+        })
+    }
+    if(cmd === `${prefix}use`){
+        let args = message.content.split(" ").slice(1)[0];
+        if(!args){
+            let insertcode = new Discord.RichEmbed()
+            .setTitle(`:x: - **��الرجاء ادخال كود الهديه** \`${prefix}use <code>\``)
+            .setColor("RED")
+            message.reply(insertcode).then(m => m.delete(3000));
+            return
+        }
+        let checkembed = new Discord.RichEmbed()
+        .setTitle(`:writing_hand: - **جاري التحقق من الكود**`)
+        .setColor("PURPLE")
+        message.reply(checkembed).then( um => {
+            if(GiftKeys[args]){
+                let have = message.member.roles.find("name", GiftKeys[args].name);
+                if(have){
+                    let haveembed = new Discord.RichEmbed()
+                    .setTitle(`:x: - **انت تمتلك الرتبه بالفعل**`)
+                    .setColor("RED")
+                    um.edit(haveembed)
+                    return
+                }
+                let doneemed = new Discord.RichEmbed()
+                .setTitle(`:tada: **مبروك تم إعطائك الرتبه**`)
+                .setColor("PURPLE")
+                um.edit(doneemed)
+                message.member.addRole(GiftKeys[args])
+                delete GiftKeys[args]
+                save()
+            }else{
+                let wrongembed = new Discord.RichEmbed()
+                .setTitle(`:x: **الكود غير صحيح او تم استعماله**`)
+                .setColor("BLACK")
+                um.edit(wrongembed)
+            }
+        });
+    }
+});
+
+
+function generateKey(message,role){
+    var randomKeys = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var gift = "";
+    for (var y = 0; y < 16; y++){
+        gift += `${randomKeys.charAt(Math.floor(Math.random() * randomKeys.length))}`;
+    }
+    GiftKeys[gift] = role;
+    let sendembed = new Discord.RichEmbed()
+    .setTitle(`:white_check_mark: **تم ارسال الكود على الخاص!**`)
+    .setColor("GREEN")
+    message.reply(sendembed);
+        message.author.send(`**كود الهدية : \`${gift}\`
+لإستعمال الكود : ${prefix}use \`${gift}\`**`);
+    save()
+}
+
+function save(){
+    fs.writeFile("./giftkeys1.json", JSON.stringify(GiftKeys ,null ,2), (err) => {
+        if (err) console.log(err)
+    });
+}
+
+client.on('message', message => {
+    if(message.content.startsWith(prefix + "info")){
+        var emdeed = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.displayAvatarURL)
+        .setThumbnail(message.author.avatarURL)
+        .addField("VIP | في اي بي",`**مميزات الرتبة :
+        - رتبة راينبو !rainbow
+        - قيف اوايات خاصه
+        - شات خاص باعضاء الفي اي بي
+        - للشراء !buy**`)
+        message.channel.send(emdeed);
+}
+    
+
+
+})
+
+
 client.on('ready', () => {//new ready event
     setInterval(function(){
         client.guilds.forEach(g => {
@@ -142,7 +290,18 @@ client.on('message', message => {//new msg event
      message.channel.send(emdo);
       }
     })
+    client.on('message', msg => {
+        if(msg.content.startsWith(prefix + "help")) {
+            var embodd = new Discord.RichEmbed()
+           .setAuthor(`AYX VIP Help`, msg.guild.iconURL)
+           .addField("!info",`\`حول رتبة ال VIP\`\n`)
+           .addField("!buy",`\`شراء رتبة ال VIP\`\n`)
+           .addField("!ping",`\`سرعه اتصال البوت\`\n`)
+           .addField("By", `<@429335711267815424> `)
+msg.channel.send(embodd)
 
+        }
+    })
 client.on('message', async msg => { 
 	if (msg.author.bot) return undefined;
 	if (!msg.content.startsWith(prefix)) return undefined;
