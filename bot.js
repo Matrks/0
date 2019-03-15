@@ -3,7 +3,6 @@ const db = require('quick.db');
 const client = new Discord.Client();   
 const giphy = require('giphy-api')();    
 const googl = require('goo.gl'); 
-let GiftKeys = JSON.parse(fs.readFileSync("./giftkeys1.json", "utf8"));
 const translate = require('google-translate-api'); 
 const fs = require("fs");      
 const getYoutubeID = require('get-youtube-id'); 
