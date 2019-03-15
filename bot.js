@@ -74,97 +74,60 @@ client.on('ready', function(){
   console.log('GBot -Bot Is Online')
   console.log('---------------')
 });
-
-const category = "556086713714212885";
-const devs     = ["429335711267815424"];
-let mtickets   = true;
-let tchannels  = [];
-let current    = 0;
- 
- 
-client.on('message',async message => {
-    const emojis   = { yes: `${client.guilds.find(r => r.id === ':x:').emojis.find(e => e.name === 'Yes')}`, wrong: `${client.guilds.find(r => r.id === 'ايدي الايموجي الي تبيه').emojis.find(e => e.name === 'Wrong')}` };
-    if(message.author.bot || message.channel.type === 'dm') return;
-    let args = message.content.split(" ");
-    let author = message.author.id;
-    if(args[0].toLowerCase() === `${prefix}help`) {
-            let embed = new Discord.RichEmbed()
-            .setAuthor(message.author.username, message.author.avatarURL)
-            .setThumbnail(message.author.avatarURL)
-            .setColor("#36393e")
-            .addField(`❯ لعمل تكت, \`${prefix}new\``, `» Syntax: \`${prefix}new [Reason]\`\n» Description: **لعمل روم فقط يظهر لك ولأدارة السيرفر.**`)
-            .addField(`❯ قائمة الأوامر, \`${prefix}help\``, `» Syntax: \`${prefix}help\`\n» Description: **يظهر لك جميع اوامر البوت.**`)
-            .addField(`❯ لإيقاف الأعضاء من عمل تكتات, \`${prefix}mtickets\``, `» Syntax: \`${prefix}mtickets [Disable/Enable]\`\n» Description: **لجعل جميع اعضاء السيرفر غير قادرون على عمل تكت.**`)
-            .addField(`❯ لأقفال جميع التكتات المفتوحة, \`${prefix}deletetickets\``, `» Syntax: \`${prefix}deletetickets\`\n» Description: **لمسح جميع رومات التكتات المفتوحة في السيرفر**`)
-            .addField(`❯ لقفل التكت المفتوح, \`${prefix}close\``, `» Syntax: \`${prefix}close\`\n» Description: **لأقفال تكت.**\n\n`)
-            await message.channel.send(`${emojis.yes}, **هذه قائمة بجميع اوامر البووت.**`);
-            await message.channel.send(embed);
-    } else if(args[0].toLowerCase() === `${prefix}new`) {
-        if(mtickets === false) return message.channel.send(`${emojis.wrong}, **تم ايقاف هذه الخاصية من قبل احد ادارة السيرفر**`);
-        if(!message.guild.me.hasPermission("MANAGE_CHANNELS")) return message.channel.send(`${emojis.wrong}, **البوت لا يملك صلاحيات لصنع الروم**`);
-        console.log(current);
-        let openReason = "";
-        current++;
-        message.guild.createChannel(`ticket-${current}`, 'text').then(c => {
-        tchannels.push(c.id);
-        c.setParent(category);
-        message.channel.send(`${emojis.yes}, **تم عمل التكت.**`);
-        c.overwritePermissions(message.guild.id, {
-            READ_MESSAGES: false,
-            SEND_MESSAGES: false
-        });
-        c.overwritePermissions(message.author.id, {
-            READ_MESSAGES: true,
-            SEND_MESSAGES: true
-        });
-       
-        if(args[1]) openReason = `\nسبب فتح التكت , " **${args.slice(1).join(" ")}** "`;
-        let embed = new Discord.RichEmbed()
-        .setAuthor(message.author.username, message.author.avatarURL)
-        .setColor("#36393e")
-        .setDescription(`**انتظر قليلا الى حين رد الادارة عليك**${openReason}`);
-        c.send(`${message.author}`);
-        c.send(embed);
-    });
-    } else if(args[0].toLowerCase() === `${prefix}mtickets`) {
-        if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(`${emojis.wrong}, **أنت لست من ادارة السيرفر لتنفيذ هذا الأمر.**`);
-        if(args[1] && args[1].toLowerCase() === "enable") {
-            mtickets = true;
-            message.channel.send(`${emojis.yes}, **تم تفعيل التكتات , الاَن يمكن لأعضاء السيرفر استخدام امر انشاء التكت**`);
-        } else if(args[1] && args[1].toLowerCase() === "disable") {
-            mtickets = false;
-            message.channel.send(`${emojis.yes}, **تم اغلاق نظام التكتات , الاَن لا يمكن لأي عضو استخدام هذا الأمر**`);
-        } else if(!args[1]) {
-            if(mtickets === true) {
-            mtickets = false;
-            message.channel.send(`${emojis.yes}, **تم اغلاق نظام التكتات , الاَن لا يمكن لأي عضو استخدام هذا الأمر**`);
-            } else if(mtickets === false) {
-            mtickets = true;
-            message.channel.send(`${emojis.yes}, **تم تفعيل التكتات , الاَن يمكن لأعضاء السيرفر استخدام امر انشاء التكت**`);
-            }
-        }
-    } else if(args[0].toLowerCase() === `${prefix}close`) {
-        if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(`${emojis.wrong}, **أنت لست من ادارة السيرفر لتنفيذ هذا الأمر.**`);
-        if(!message.channel.name.startsWith('ndticket-') && !tchannels.includes(message.channel.id)) return message.channel.send(`${emojis.wrong}, **هذا الروم ليس من رومات التكت.**`);
-       
-        message.channel.send(`${emojis.yes}, **سيتم اغلاق الروم في 3 ثواني من الاَن.**`);
-        tchannels.splice( tchannels.indexOf(message.channel.id), 1 );
-        setTimeout(() => message.channel.delete(), 3000);
-   
-    } else if(args[0].toLowerCase() === `${prefix}deletetickets`) {
-        let iq = 0;
-        for(let q = 0; q < tchannels.length; q++) {
-            let c = message.guild.channels.get(tchannels[q]);
-            if(c) {
-                c.delete();
-                tchannels.splice( tchannels[q], 1 );
-                iq++;
-            }
-            if(q === tchannels.length - 1 || q === tchannels.lengh + 1) {
-                message.channel.send(`${emojis.yes}, **تم مسح \`${iq}\` من التكتات.**`);
-            }
-        }
+client.on("message", (message) => {
+    /// ALPHA CODES
+   if (message.content.startsWith("$new")) {     /// ALPHA CODES
+        const reason = message.content.split(" ").slice(1).join(" ");     /// ALPHA CODES
+        if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
+        if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`You already have a ticket open.`);    /// ALPHA CODES
+        message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
+            let role = message.guild.roles.find("name", "Support Team");
+            let role2 = message.guild.roles.find("name", "@everyone");
+            c.overwritePermissions(role, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });    /// ALPHA CODES
+            c.overwritePermissions(role2, {
+                SEND_MESSAGES: false,
+                READ_MESSAGES: false
+            });
+            c.overwritePermissions(message.author, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });
+            message.channel.send(`:white_check_mark: Your ticket has been created, #${c.name}.`);
+            const embed = new Discord.RichEmbed()
+                .setColor(0xCF40FA)
+                .addField(`Hey ${message.author.username}!`, `Please try explain why you opened this ticket with as much detail as possible. Our **Support Staff** will be here soon to help.`)
+                .setTimestamp();
+            c.send({
+                embed: embed
+            });
+        }).catch(console.error);
     }
+ 
+ 
+  if (message.content.startsWith("$close")) {
+        if (!message.channel.name.startsWith(`ticket-${current}`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+ 
+       message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`نعم\`. This will time out in 10 seconds and be cancelled.`)
+           .then((m) => {
+               message.channel.awaitMessages(response => response.content === 'نعم', {
+                       max: 1,
+                       time: 10000,
+                       errors: ['time'],
+                   })    /// ALPHA CODES
+                   .then((collected) => {
+                       message.channel.delete();
+                   })    /// ALPHA CODES
+                   .catch(() => {
+                       m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
+                           m2.delete();
+                       }, 3000);
+                   });
+           });
+   }
+ 
 });
 
 const adminprefix = "*vip";
