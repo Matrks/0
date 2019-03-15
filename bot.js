@@ -28,20 +28,6 @@ const sql = require("sqlite");
 
 
 
-client.on('message',async message => {
-const emojis   = { arrow: `${client.guilds.find(r => r.id === '553508691425361940').emojis.find(e => e.name === 'arrow')}` };
-
-       if (message.content.startsWith(prefix + "$help")) {
-        
-       message.channel.send(`** • قـــائمة الاومر ** :
-       ${emojis.arrow}, **| ${prefix}help-ticket ⇏ \`اوامر التكت!\`
-        ${emojis.arrow},  | ${prefix}help-general ⇏ \`The mute time is 1day!\`** `)
-
-
-   }
-
-});
-
 var prefix = "$";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -894,6 +880,14 @@ client.on('message',async message => {
 
 :earth_asia: $invite | لمعرفه عدد دعواتك
 
+:earth_asia: $credit | لمعرفه رصيدك 
+
+:earth_asia: $daily | لخذ راتب اليومي
+
+:earth_asia: $profile | لعرض برفايل 
+
+:earth_asia: $rep | لعطاء ريب
+
 :earth_asia: $setVoice | لعمل روم يظهر في كم شخص في رومات صوتيه
 
 :earth_asia: $setCount | لعمل روم يظهر في كم شخص في سيرفر
@@ -941,7 +935,7 @@ client.on('message',async message => {
 ❖ $inv | لدعوة بوت الى سيرفرك
 ❖ $bot | معلومات عن بوت
 ❖ hey لو تبي بوت يرحب سوي روم اسمو 
-By : Matrks#5598**
+By : <@429335711267815424>**
 `);
  
     }
@@ -1906,7 +1900,7 @@ client.on('guildCreate', guild => {
 
            
 client.on("message", msg => {
-  if(msg.content === '*' + "id") {
+  if(msg.content === '$' + "id") {
       const embed = new Discord.RichEmbed();
   embed.addField("**🔱| اسم الحساب :**", `${msg.author.username}#${msg.author.discriminator}`, true)
           .addField("**🆔| الاي دي :**", `${msg.author.id}`, true)
