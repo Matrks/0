@@ -127,7 +127,7 @@ client.on('message',async message => {//لاتنسى سوي ملف إسمو cred
    
 if(message.author.bot) return;//وضع فيه {}
 if(!credits[message.author.id]) credits[message.author.id] = {
-    credits: 5000000000
+    credits: 0
 };
  
 let userData = credits[message.author.id];
