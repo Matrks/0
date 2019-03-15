@@ -75,7 +75,7 @@ client.on('ready', function(){
   console.log('---------------')
 });
 
-const category = "ايدي الكاتقوري حق التذاكر";
+const category = "556086713714212885";
 const devs     = ["429335711267815424"];
 let mtickets   = true;
 let tchannels  = [];
@@ -83,11 +83,11 @@ let current    = 0;
  
  
 client.on('message',async message => {
-    const emojis   = { yes: `${client.guilds.find(r => r.id === 'ايدي الايموجي الي تبيه').emojis.find(e => e.name === 'Yes')}`, wrong: `${client.guilds.find(r => r.id === 'ايدي الايموجي الي تبيه').emojis.find(e => e.name === 'Wrong')}` };
+    const emojis   = { yes: `${client.guilds.find(r => r.id === '553508691425361940').emojis.find(e => e.name === 'Yes')}`, wrong: `${client.guilds.find(r => r.id === 'ايدي الايموجي الي تبيه').emojis.find(e => e.name === 'Wrong')}` };
     if(message.author.bot || message.channel.type === 'dm') return;
     let args = message.content.split(" ");
     let author = message.author.id;
-    if(args[0].toLowerCase() === `$help`) {
+    if(args[0].toLowerCase() === `${prefix}help`) {
             let embed = new Discord.RichEmbed()
             .setAuthor(message.author.username, message.author.avatarURL)
             .setThumbnail(message.author.avatarURL)
