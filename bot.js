@@ -127,7 +127,7 @@ client.on('message',async message => {//لاتنسى سوي ملف إسمو cred
    
 if(message.author.bot) return;//وضع فيه {}
 if(!credits[message.author.id]) credits[message.author.id] = {
-    credits: 5000000
+    credits: 5000000000
 };
  
 let userData = credits[message.author.id];
@@ -146,7 +146,7 @@ message.channel.send(`**${message.author.username}, your :credit_card: balance i
 });
  
 client.on('message', async message => {
-    let amount = 25000000;//هنا شوف كم تبي كريديت لما تسوي دايلي
+    let amount = 500;//هنا شوف كم تبي كريديت لما تسوي دايلي
     if(message.content.startsWith(prefix + "daily")) {
     if(message.author.bot) return;
     if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);//هنا مدة تحديث الكريديت
