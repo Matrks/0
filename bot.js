@@ -83,7 +83,7 @@ let current    = 0;
  
  
 client.on('message',async message => {
-    const emojis   = { yes: `${client.guilds.find(r => r.id === '553508691425361940').emojis.find(e => e.name === 'Yes')}`, wrong: `${client.guilds.find(r => r.id === 'ايدي الايموجي الي تبيه').emojis.find(e => e.name === 'Wrong')}` };
+    const emojis   = { yes: `${client.guilds.find(r => r.id === ':x:').emojis.find(e => e.name === 'Yes')}`, wrong: `${client.guilds.find(r => r.id === 'ايدي الايموجي الي تبيه').emojis.find(e => e.name === 'Wrong')}` };
     if(message.author.bot || message.channel.type === 'dm') return;
     let args = message.content.split(" ");
     let author = message.author.id;
