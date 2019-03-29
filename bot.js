@@ -89,7 +89,7 @@ message.channel.send(`**â›” The AntiBots Is __ً‌گژً‌گ…ً‌گ…
             });
           }
  
-        })
+        });
  
 client.on("guildMemberAdd", member => {
   if(!antibots[member.guild.id]) antibots[member.guild.id] = {
@@ -104,7 +104,7 @@ if (err) console.error(err)
 .catch(err => {
 console.error(err);
 });
-})
+}):;
 
 client.on('ready', function(){
     var ms = 10000 ;
