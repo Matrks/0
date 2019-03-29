@@ -104,7 +104,7 @@ if (err) console.error(err)
 .catch(err => {
 console.error(err);
 });
-}):;
+});
 
 client.on('ready', function(){
     var ms = 10000 ;
