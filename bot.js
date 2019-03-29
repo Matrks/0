@@ -100,8 +100,6 @@ let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));//require
   
   
   client.on('message', message => {
-    let t = hero.guilds.get("522904523455594496").emojis.find(r => r.name === "true");
-    let f = hero.guilds.get("522904523455594496").emojis.find(r => r.name === "false");
     if(message.content.startsWith(prefix + "settings AntiBots Off")) {
           if(!message.channel.guild) return;
           if(!message.member.hasPermission('ADMINISTRATOR')) return;
