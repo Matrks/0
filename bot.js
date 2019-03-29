@@ -375,8 +375,16 @@ client.on("reachLimit", (limit)=> {
     });
   });
 
+client.on('ready', () => {
+   console.log(`----------------`);
+      console.log(`Desert Bot- Script By : osama,tech.#0184`);
+        console.log(`----------------`);
+      console.log(`ON ${client.guilds.size} Servers '     Script By : osama,tech.#0184 ' `);
+    console.log(`----------------`);
+  console.log(`Logged in as ${client.user.tag}!`);
 });
-	
+
+
 const Canvas = require("canvas"); //npm i canvas
 let profile = JSON.parse(fs.readFileSync("profile.json", "utf8"))
 client.on("message", message => {
