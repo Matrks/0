@@ -26,37 +26,53 @@ const sql = require("sqlite");
 ,ti={}  
 ,spee={};
 
-client.on('message', msg => {
-    let params = msg.content.slice(prefix.length).trim().split(/ +/g);
- 
-  if(msg.author.bot) return
-  if(msg.content.toLowerCase().startsWith(prefix + 'setorder')) {
-    if(!params[1]) return msg.channel.send(`منشن الروم او اكتب اسمه`)
-    let channel = msg.mentions.channels.first() || msg.guild.channels.find(c => c.name.toLowerCase().startsWith(params[1].toLowerCase()));
-    if(channel === undefined) return msg.channel.send(`**انا لم استطع العثور على هذا الروم ${params[1]}**`)
-    db.set(`order.${msg.guild.id}.channel`, channel.id)
-    msg.channel.send(`**تم اعداد روم الطلب ل روم ${channel}**`)
-  }
+client.on('message', async message => {
+  if(message.content.startsWith(prefix + "order")) {
+    await message.channel.send("**ما هو طلبك ؟ :small_orange_diamond:**").then(e => {
+    let filter = m => m.author.id === message.author.id
+    let lan = '';
+    let md = '';
+    let br = '';
+    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
+    .then(collected => {
+      lan = collected.first().content
+      collected.first().delete()
+e.delete();
+     message.channel.send('**كم تدفع ؟ :small_blue_diamond:**').then(m => {
+let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
+.then(co => {
+  md = co.first().content
+        co.first().delete()
+        m.delete();
+message.channel.send('**من أي شخص تشتري ؟ :small_orange_diamond: **').then(ms => {
+let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
+.then(col => {
+  br = col.first().content
+        col.first().delete()
+
+ms.delete()
+
+ message.channel.send('** انتظر..**').then(b => {
+        setTimeout(() => {
+  b.edit(`**تم طلب وسيتم الرد فـ اقرب وقت:white_check_mark:**`)
+        },2000);
+var gg = message.guild.channels.find('name','order')
+if(!gg) return;
+if(gg) {
+gg.send({embed : new Discord.RichEmbed()
+.setDescription(`** ما هو طلب ؟ :small_orange_diamond: » \n ${lan}\nLD كم يدفع :small_blue_diamond: » \n ${md} \n من أي شخص يشتري :small_orange_diamond: » \n ${br}  \n تم طلب بوسطة :top: » <@${message.author.id}> **`)  
+          .setFooter(`Leaders4Ever♥`)
+.setTimestamp()
+});
+}        
 })
- 
-client.on('message', msg => {
-    let params = msg.content.slice(prefix.length).trim().split(/ +/g);
- 
-  if(msg.author.bot) return
- 
-  if(msg.content.toLowerCase().startsWith(prefix + 'order')) {
-    let args = params.slice(1).join(' ')
-    if(channelID === null || channelID === undefined) return msg.channel.send(`قم بأعداد روم الطلب عن طريق الامر الآتي \n ${prefix}setOrder #channel`)
-    let channel = msg.guild.channels.get(channelID)
-    if(channel === undefined) return msg.channel.send(`قم بأعداد روم الطلب عن طريق الامر الآتي \n ${prefix}setOrder #channel`)
-    if(!args) return msg.channel.send(`اكتب طلبك لو سمحت ^^`)
-    let embed = new Discord.RichEmbed()
-    .setTitle(`🔔New Order!!`)
-    .setDescription(`\**▶sender** => <@${msg.author.id}> \n \n**🛒order =>** **\`${args}\`**`)
-    .setFooter(`By Codes`)
-    .setTimestamp(Date.now())
-    channel.send(embed)
-  }
+})
+})
+})
+})
+})
+})
+ }
 })
 
 var prefix = "$";
