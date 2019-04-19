@@ -46,7 +46,6 @@ client.on('message', msg => {
  
   if(msg.content.toLowerCase().startsWith(prefix + 'order')) {
     let args = params.slice(1).join(' ')
-    let channelID = db.get(`order.${msg.guild.id}.channel`)
     if(channelID === null || channelID === undefined) return msg.channel.send(`قم بأعداد روم الطلب عن طريق الامر الآتي \n ${prefix}setOrder #channel`)
     let channel = msg.guild.channels.get(channelID)
     if(channel === undefined) return msg.channel.send(`قم بأعداد روم الطلب عن طريق الامر الآتي \n ${prefix}setOrder #channel`)
