@@ -26,12 +26,7 @@ const sql = require("sqlite");
 ,ti={}  
 ,spee={};
 
-const Discord = require('discord.js')
-const db = require('quick.db') // لا تنسى تحمل البكج ذا | npm i quick.db@7.0.0-b22 | او ضيف ذا السطر لملف البكج اذا كان خادمك مو وندز او لينكس : "quick.db": "^7.0.0-b22",
-const bot = new Discord.Client()
-const prefix = "$"
- 
-bot.on('message', msg => {
+client.on('message', msg => {
     let params = msg.content.slice(prefix.length).trim().split(/ +/g);
  
   if(msg.author.bot) return
@@ -44,7 +39,7 @@ bot.on('message', msg => {
   }
 })
  
-bot.on('message', msg => {
+clinent.on('message', msg => {
     let params = msg.content.slice(prefix.length).trim().split(/ +/g);
  
   if(msg.author.bot) return
