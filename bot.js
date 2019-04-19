@@ -60,8 +60,8 @@ var gg = message.guild.channels.find('name','order')
 if(!gg) return;
 if(gg) {
 gg.send({embed : new Discord.RichEmbed()
-.setDescription(`** ما هو طلب ؟ :small_orange_diamond: » \n ${lan}\nLD كم يدفع :small_blue_diamond: » \n ${md} \n من أي شخص يشتري :small_orange_diamond: » \n ${br}  \n تم طلب بوسطة :top: » <@${message.author.id}> **`)  
-          .setFooter(`Leaders4Ever♥`)
+.setDescription(`** ما هو طلب ؟ :small_orange_diamond: » \n ${lan}\n  كم يدفع :small_blue_diamond: » \n ${md} \n من أي شخص يشتري :small_orange_diamond: » \n ${br}  \n تم طلب بوسطة :top: » <@${message.author.id}> **`)  
+          .setFooter(`Dmo3 Group`)
 .setTimestamp()
 });
 }        
