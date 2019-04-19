@@ -39,7 +39,7 @@ client.on('message', msg => {
   }
 })
  
-clinent.on('message', msg => {
+client.on('message', msg => {
     let params = msg.content.slice(prefix.length).trim().split(/ +/g);
  
   if(msg.author.bot) return
